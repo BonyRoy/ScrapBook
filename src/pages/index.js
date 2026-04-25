@@ -19,12 +19,9 @@ import Page18 from "./Page18.jsx";
 import Page19 from "./Page19.jsx";
 import Page20 from "./Page20.jsx";
 import Page21 from "./Page21.jsx";
-import Page22 from "./Page22.jsx";
-import Page23 from "./Page23.jsx";
-import Page24 from "./Page24.jsx";
 
 /**
- * 24 book pages, each implemented in its own file under src/pages/
+ * Book pages, each implemented in its own file under src/pages/
  */
 export const BOOK_PAGES = [
   { id: "page-01", Component: Page01 },
@@ -48,7 +45,4 @@ export const BOOK_PAGES = [
   { id: "page-19", Component: Page19 },
   { id: "page-20", Component: Page20 },
   { id: "page-21", Component: Page21 },
-  { id: "page-22", Component: Page22 },
-  { id: "page-23", Component: Page23 },
-  { id: "page-24", Component: Page24 },
 ];

@@ -1,7 +1,5 @@
 import GenericTextPage from "./GenericTextPage.jsx";
 
-const Page5 = () => (
-  <GenericTextPage title="Page 5" text="Edit src/pages/Page5.jsx to add your content." />
-);
+const Page5 = () => <GenericTextPage title="Meet the Squad" />;
 
 export default Page5;

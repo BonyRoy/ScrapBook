@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { BOOK_PAGES } from "./pages";
 import MusicBar from "./MusicBar.jsx";
 import BackgroundDecor from "./BackgroundDecor.jsx";
+import BookPagePaperDecor from "./BookPagePaperDecor.jsx";
+import ImagePreview from "./ImagePreview.jsx";
 import "./App.css";
 
 const SWIPE_MIN_PX = 56;
@@ -11,8 +13,11 @@ const SCROLL_VERT_DOMINANCE = 1.2;
 const App = () => {
   const total = BOOK_PAGES.length;
   const [current, setCurrent] = React.useState(0);
+  const [imagePreview, setImagePreview] = React.useState(null);
   const canPrev = current > 0;
   const canNext = current < total - 1;
+
+  const closeImagePreview = useCallback(() => setImagePreview(null), []);
 
   const goNext = useCallback(() => {
     setCurrent((c) => (c < total - 1 ? c + 1 : c));
@@ -51,15 +56,34 @@ const App = () => {
 
   useEffect(() => {
     const onKey = (e) => {
+      if (imagePreview) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          setImagePreview(null);
+        }
+        return;
+      }
       if (e.key === "ArrowRight" || e.key === "PageDown") goNext();
       if (e.key === "ArrowLeft" || e.key === "PageUp") goPrev();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [goNext, goPrev]);
+  }, [goNext, goPrev, imagePreview]);
+
+  const onAppClick = (e) => {
+    if (e.target.closest(".image-preview")) return;
+    if (e.target.closest(".app-bg-decor")) return;
+    const img = e.target.closest("img");
+    if (!img) return;
+    if (img.getAttribute("data-no-preview") != null) return;
+    e.preventDefault();
+    const src = img.currentSrc || img.getAttribute("src");
+    if (!src) return;
+    setImagePreview({ src, alt: img.getAttribute("alt") || "" });
+  };
 
   return (
-    <div className="app">
+    <div className="app" onClick={onAppClick}>
       <BackgroundDecor />
       <MusicBar />
       <div
@@ -88,12 +112,15 @@ const App = () => {
                   aria-hidden={i !== current}
                 >
                   <div className="book-page-face book-page-face--front">
+                    <BookPagePaperDecor />
                     <PageComponent />
                   </div>
                   <div
                     className="book-page-face book-page-face--back"
                     aria-hidden="true"
-                  />
+                  >
+                    <BookPagePaperDecor />
+                  </div>
                 </div>
               );
             })}
@@ -124,6 +151,12 @@ const App = () => {
           Next →
         </button>
       </div>
+
+      <ImagePreview
+        src={imagePreview?.src}
+        alt={imagePreview?.alt}
+        onClose={closeImagePreview}
+      />
     </div>
   );
 };
