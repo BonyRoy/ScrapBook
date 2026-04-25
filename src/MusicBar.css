@@ -1,0 +1,209 @@
+/* Playing: one row — seek | time | pause (aligned, no separate layer) */
+.music-now {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  padding: max(0.5rem, env(safe-area-inset-top, 0px)) max(0.5rem, env(safe-area-inset-right, 0px)) 0.5rem
+    max(0.5rem, env(safe-area-inset-left, 0px));
+  background: #f4f1ea;
+  color: #2c2218;
+}
+
+.music-now__inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 100%;
+  min-height: 3.35rem;
+  box-sizing: border-box;
+}
+
+.music-now__brand-block {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.08rem;
+  line-height: 1.05;
+}
+
+.music-now__kicker {
+  font-family: "Dancing Script", cursive;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #5c4f42;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.music-now__brand {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2c2218;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* Extra visual weight (script caps at 700 in our font import) */
+  text-shadow: 0.5px 0 0 #2c2218, -0.5px 0 0 #2c2218, 0 0.35px 0 #2c2218, 0 -0.35px 0 #2c2218;
+}
+
+.music-now__brand:hover {
+  color: #1a1510;
+  text-shadow: 0.5px 0 0 #1a1510, -0.5px 0 0 #1a1510, 0 0.35px 0 #1a1510, 0 -0.35px 0 #1a1510;
+}
+
+.music-now__brand:focus-visible {
+  outline: 2px solid #8b7355;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.music-now__seek-wrap {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+.music-now__seek {
+  width: 100%;
+  height: 0.3rem;
+  border-radius: 2px;
+  cursor: pointer;
+  accent-color: #8b7355;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(44, 34, 24, 0.15);
+  align-self: center;
+}
+
+.music-now__seek::-webkit-slider-runnable-track {
+  height: 0.3rem;
+  border-radius: 2px;
+  background: rgba(44, 34, 24, 0.15);
+}
+
+.music-now__seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: -0.3rem;
+  border-radius: 50%;
+  background: #faf7f0;
+  box-shadow: 0 0 0 1px rgba(44, 34, 24, 0.4);
+}
+
+.music-now__seek::-moz-range-track {
+  height: 0.3rem;
+  border-radius: 2px;
+  background: rgba(44, 34, 24, 0.15);
+}
+
+.music-now__seek::-moz-range-thumb {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 0;
+  border-radius: 50%;
+  background: #faf7f0;
+  box-shadow: 0 0 0 1px rgba(44, 34, 24, 0.4);
+}
+
+.music-now__time {
+  font-family: "Dancing Script", cursive;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #4a3f32;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+}
+
+/* Pause in the bar — same size as floating speaker, optically centered with row */
+.music-fab--inbar {
+  flex-shrink: 0;
+  margin-left: 0;
+  box-shadow: none;
+}
+
+/* Idle: speaker fixed top-right */
+.music-fab-wrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2001;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  padding: max(0.5rem, env(safe-area-inset-top)) max(0.5rem, env(safe-area-inset-right)) 0 0.5rem;
+  max-width: min(100vw, 20rem);
+  pointer-events: auto;
+}
+
+.music-fab__error {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  text-align: right;
+  color: #6b3a2a;
+  text-wrap: balance;
+  pointer-events: none;
+}
+
+.music-fab {
+  font-family: "Dancing Script", cursive;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  min-width: 3.1rem;
+  min-height: 3.1rem;
+  border: 1px solid rgba(44, 34, 24, 0.3);
+  border-radius: 50%;
+  background: #faf5ee;
+  color: #2c2218;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  padding: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.music-fab:active {
+  transform: scale(0.97);
+}
+
+.music-fab__icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  pointer-events: none;
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
