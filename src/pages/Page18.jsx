@@ -1,8 +1,10 @@
 import img80 from "../images/80.png";
 import img81 from "../images/81.png";
 import img82 from "../images/82.png";
+import img83 from "../images/83.png";
+import img84 from "../images/84.png";
 
-/** Book page 18 of 24 — 80–82, “FAM JAM” (portrait · wide landscape · portrait) */
+/** Page 18 — 80–84, “FAM JAM” (portrait + wide + portrait, then 83 & 84) */
 export default function Page18() {
   return (
     <div className="book-page-inner book-page-inner--page18-fam">
@@ -25,6 +27,15 @@ export default function Page18() {
           </figure>
           <figure className="page18-frame page18-frame--R">
             <img src={img82} alt="Memory 82" />
+          </figure>
+        </div>
+
+        <div className="page18-trio page18-trio--duo">
+          <figure className="page18-frame page18-frame--duoL">
+            <img src={img83} alt="Memory 83" />
+          </figure>
+          <figure className="page18-frame page18-frame--duoR">
+            <img src={img84} alt="Memory 84" />
           </figure>
         </div>
       </div>

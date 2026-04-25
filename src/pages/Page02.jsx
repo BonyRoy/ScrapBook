@@ -4,7 +4,7 @@ const Page02 = () => (
     <h2>My Peps</h2>
     <img
       src={image}
-      alt="My Peps"
+      alt="My Peeps"
       style={{ padding: 10, backgroundColor: "white" }}
     />
   </div>

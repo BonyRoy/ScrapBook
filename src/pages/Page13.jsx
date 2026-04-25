@@ -16,10 +16,7 @@ export default function Page13() {
         <span className="page13-deco page13-deco--dot" aria-hidden="true" />
         <span className="page13-deco page13-deco--dot2" aria-hidden="true" />
 
-        <div className="page13-words">
-          <p className="page13-line1">We love you</p>
-          <p className="page13-line2">in your quirks</p>
-        </div>
+        <h2 className="page13-heading page13-words">We love you in your quirks</h2>
 
         <div className="page13-cols">
           <div className="page13-col page13-col--left">

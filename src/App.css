@@ -2088,9 +2088,13 @@ body {
 
 .page13-collage {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
+  padding-top: 0.45rem;
   isolation: isolate;
   flex-shrink: 0;
   min-width: 0;
@@ -2125,35 +2129,30 @@ body {
 }
 
 .page13-words {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 30%;
-  left: 60%;
-  width: 32%;
-  transform: translateX(-50%);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 0.38rem;
+  padding: 0 0.2rem;
   text-align: center;
   color: #fff;
   font-family: "Dancing Script", cursive;
-  pointer-events: none;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-  line-height: 1.05;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  line-height: 1.2;
+  flex-shrink: 0;
+  order: 0;
 }
 
-.page13-line1,
-.page13-line2 {
-  margin: 0;
+.book-page-face--front .book-page-inner--page13-love h2.page13-heading {
+  font-size: clamp(1.05rem, 2.8vw, 1.4rem);
   font-weight: 600;
-}
-
-.page13-line1 {
-  font-size: clamp(0.95rem, 2.3vw, 1.2rem);
-}
-
-.page13-line2 {
-  margin-top: 0.12em;
-  margin-left: 0.35em;
-  font-size: clamp(0.85rem, 2.05vw, 1.05rem);
-  text-align: right;
+  margin: 0;
+  padding: 0;
+  border: none;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
 }
 
 .page13-cols {
@@ -2162,8 +2161,10 @@ body {
   display: grid;
   grid-template-columns: 0.92fr 1.08fr 0.9fr;
   gap: 0.32rem;
-  align-items: stretch;
+  align-items: start;
   min-width: 0;
+  flex: 0 1 auto;
+  min-height: 0;
 }
 
 .page13-col {
@@ -2171,7 +2172,14 @@ body {
   flex-direction: column;
   gap: 0.3rem;
   min-width: 0;
-  height: 100%;
+  height: auto;
+  align-self: start;
+}
+
+/* Middle column: stretch to full grid row; last photo fills leftover height */
+.page13-col--mid {
+  align-self: stretch;
+  min-height: 0;
 }
 
 .page13-frame {
@@ -2201,6 +2209,25 @@ body {
   aspect-ratio: 4 / 3;
 }
 
+/* Bottom middle photo (58): flex-basis 0 so grow actually receives free space (not auto) */
+.page13-col--mid .page13-frame--wide:last-of-type {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.page13-col--mid .page13-frame--wide:last-of-type img {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: max(3.75rem, 18vmin);
+  height: 100%;
+  max-height: none;
+  aspect-ratio: unset;
+  object-fit: cover;
+  object-position: center;
+}
+
 .page13-frame--hero {
   box-shadow: 0 3px 11px rgba(0, 0, 0, 0.2);
 }
@@ -2210,22 +2237,26 @@ body {
 }
 
 .page13-col--right {
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .page13-col--right .page13-frame--tall {
-  flex: 1 1 0;
+  flex: 0 1 auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
 }
 
+/* Shorter than full-column flex — keeps portrait but caps height */
 .page13-col--right .page13-frame--tall img {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   width: 100%;
   min-height: 0;
+  max-height: clamp(6.5rem, 22vmin, 8.4rem);
+  height: auto;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+  object-position: center;
 }
 
 .page13-col--right .page13-frame--short {
@@ -2286,14 +2317,8 @@ body {
     gap: 0.22rem;
   }
 
-  .page13-words {
-    top: 28%;
-    left: 58%;
-    width: 36%;
-  }
-
-  .page13-line2 {
-    margin-left: 0.2em;
+  .book-page-face--front .book-page-inner--page13-love h2.page13-heading {
+    font-size: clamp(0.95rem, 2.4vw, 1.2rem);
   }
 }
 
@@ -3239,7 +3264,7 @@ body {
   font-family: "Dancing Script", cursive;
 }
 
-/* Page 18 — 80–82, “FAM JAM”, side portraits + wide center */
+/* Page 18 — 80–84, “FAM JAM” — row 1: portrait + landscape + portrait; row 2: 83 + 84 */
 .book-page-face--front .book-page-inner--page18-fam {
   background: #b79260
     linear-gradient(152deg, rgba(255, 255, 255, 0.07) 0%, rgba(0, 0, 0, 0.04) 100%) !important;
@@ -3367,6 +3392,37 @@ body {
   aspect-ratio: 4 / 3;
 }
 
+/* FAM JAM: second row — 83 + 84 */
+.page18-trio--duo {
+  padding-top: 0.1rem;
+}
+
+.page18-trio--duo .page18-frame--duoL,
+.page18-trio--duo .page18-frame--duoR {
+  flex: 1 1 0;
+  max-width: 49.5%;
+  min-width: 0;
+}
+
+.page18-trio--duo .page18-frame--duoL {
+  transform: rotate(-0.35deg);
+}
+
+.page18-trio--duo .page18-frame--duoR {
+  transform: rotate(0.3deg);
+}
+
+.page18-trio--duo .page18-frame--duoL img,
+.page18-trio--duo .page18-frame--duoR img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.5px;
+  aspect-ratio: 3 / 4;
+}
+
 .page18-flower {
   position: absolute;
   z-index: 0;
@@ -3459,6 +3515,10 @@ body {
   .page17-trio,
   .page18-trio {
     gap: 0.24rem;
+  }
+
+  .page18-trio--duo {
+    gap: 0.22rem;
   }
 
   .page17-frame--C {
@@ -3750,8 +3810,6 @@ body {
   margin: 0;
   max-width: 100%;
   font-family: "Patrick Hand", cursive;
-  font-size: clamp(0.8rem, 1.7vw, 0.95rem);
-  line-height: 1.5;
   color: #1a1410;
   text-shadow: 0 0 0.4px rgba(255, 255, 255, 0.2);
   white-space: pre-line;
@@ -3770,6 +3828,14 @@ body {
   padding-left: 0.4rem;
   padding-bottom: 0.1rem;
   text-align: left;
+}
+
+/* Last 3 book pages (19–21): one shared body size */
+.book-page-face--front .book-page-inner--p20-notes .p20-block,
+.book-page-face--front .book-page-inner--p20-triple p.p20t-line,
+.book-page-face--front .book-page-inner--p22-ish p.p22-body {
+  font-size: clamp(0.82rem, 1.65vw, 0.95rem);
+  line-height: 1.5;
 }
 
 .p20-flower {
@@ -3861,9 +3927,411 @@ body {
   opacity: 0.65;
 }
 
+/* Page 20 (triple) — white serif on tan, torn edges: Ishita / Harsh / Parth */
+.book-page-face--front .book-page-inner--p20-triple {
+  background: #b79260
+    linear-gradient(152deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.04) 100%) !important;
+  border-radius: 0 3px 3px 0;
+  padding: 0.45rem 0.4rem 0.55rem;
+  color: #fff;
+}
+
+.p20t-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.45rem;
+  min-width: 0;
+  min-height: min(32rem, 70vh);
+  padding: 0.28rem 0.2rem 0.4rem;
+  isolation: isolate;
+}
+
+.p20t-shell::before,
+.p20t-shell::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.p20t-shell::before {
+  top: 0;
+  height: 12px;
+  background: linear-gradient(180deg, rgba(255, 252, 248, 0.96) 0%, rgba(255, 255, 255, 0.1) 100%);
+  clip-path: polygon(0 0, 1.2% 100%, 3.5% 28%, 8% 90%, 14% 22%, 21% 88%, 29% 16%, 38% 85%, 48% 18%, 58% 90%, 68% 14%, 78% 82%, 88% 20%, 98% 75%, 100% 0);
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.04));
+}
+
+.p20t-shell::after {
+  bottom: 0;
+  top: auto;
+  height: 12px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.05) 100%);
+  clip-path: polygon(0 100%, 0 0, 2% 70%, 8% 32%, 16% 78%, 25% 24%, 35% 82%, 46% 18%, 57% 78%, 68% 22%, 79% 80%, 90% 15%, 100% 0, 100% 100%);
+  filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.04));
+}
+
+.p20t-burst {
+  position: absolute;
+  z-index: 0;
+  width: clamp(1.25rem, 4vw, 1.9rem);
+  height: clamp(1.25rem, 4vw, 1.9rem);
+  background: radial-gradient(ellipse 55% 50% at 45% 40%, #e07088 0%, #9a2d4a 70%, #6a1e30 100%);
+  border-radius: 50% 45% 55% 48%;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+.p20t-burst--tr {
+  top: 0.05rem;
+  right: 0.05rem;
+  transform: rotate(10deg);
+}
+
+.p20t-burst--bl {
+  bottom: 0.35rem;
+  left: 0.08rem;
+  top: auto;
+  transform: rotate(-8deg) scale(0.95);
+}
+
+.p20t-star {
+  position: absolute;
+  z-index: 0;
+  width: 7px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  clip-path: polygon(50% 0%, 60% 35%, 100% 38%, 70% 62%, 78% 100%, 50% 78%, 22% 100%, 28% 62%, 0% 38%, 40% 35%);
+  top: 35%;
+  left: 0.1rem;
+  pointer-events: none;
+  opacity: 0.6;
+  transform: rotate(6deg);
+}
+
+.p20t-star--2 {
+  top: 52%;
+  right: 0.12rem;
+  left: auto;
+  transform: rotate(-5deg);
+}
+
+.p20t-arrow {
+  position: absolute;
+  z-index: 0;
+  right: 0.2rem;
+  top: 38%;
+  width: 0.4rem;
+  height: 1.2rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  transform: rotate(8deg);
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.p20t-sprig {
+  position: absolute;
+  z-index: 0;
+  bottom: 0.4rem;
+  right: 0.25rem;
+  width: 0.1rem;
+  height: 1rem;
+  background: linear-gradient(180deg, rgba(255, 220, 140, 0.35) 0%, rgba(200, 170, 100, 0.25) 100%);
+  border-radius: 2px;
+  transform: rotate(6deg);
+  pointer-events: none;
+  opacity: 0.5;
+  box-shadow: 3px 0 0 -1px rgba(180, 150, 90, 0.3);
+}
+
+.p20t-dot {
+  position: absolute;
+  z-index: 0;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 150, 80, 0.5);
+  border-radius: 50%;
+  top: 18%;
+  left: 0.25rem;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.p20t-tape {
+  position: absolute;
+  z-index: 0;
+  top: 0.12rem;
+  right: 0.15rem;
+  width: 1.15rem;
+  height: 0.32rem;
+  background: linear-gradient(90deg, #5a4a3e 0%, #6e5c4e 50%, #4a3c34 100%);
+  border-radius: 1px;
+  transform: rotate(6deg);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.p20t-tape--2 {
+  top: 0.22rem;
+  right: 0.5rem;
+  width: 1rem;
+  transform: rotate(-4deg);
+  opacity: 0.3;
+}
+
+.p20t-line {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  color: #fff8f0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  white-space: pre-line;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.p20t-line--top {
+  align-self: flex-start;
+  font-style: italic;
+  opacity: 0.95;
+}
+
+.p20t-line--mid {
+  align-self: center;
+  text-align: center;
+  max-width: 100%;
+  padding: 0.1rem 0.2rem;
+  font-style: italic;
+  opacity: 0.95;
+}
+
+.p20t-line--body {
+  text-align: left;
+  max-width: 100%;
+  padding-top: 0.1rem;
+  font-weight: 400;
+}
+
+.book-page-face--front .book-page-inner--p20-triple p.p20t-line {
+  margin-bottom: 0.45rem;
+}
+
+.book-page-face--front .book-page-inner--p20-triple p.p20t-line--body {
+  margin-bottom: 0.15rem;
+}
+
+/* Page 21 — Isha, centered (Canva p22) */
+.book-page-face--front .book-page-inner--p22-ish {
+  background: #b79260
+    linear-gradient(152deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.04) 100%) !important;
+  border-radius: 0 3px 3px 0;
+  padding: 0.45rem 0.4rem 0.55rem;
+  color: #fff;
+}
+
+.p22-shell {
+  position: relative;
+  min-width: 0;
+  min-height: min(32rem, 70vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.25rem 0.4rem;
+  isolation: isolate;
+}
+
+.p22-shell::before,
+.p22-shell::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.p22-shell::before {
+  top: 0;
+  height: 12px;
+  background: linear-gradient(180deg, rgba(255, 252, 248, 0.96) 0%, rgba(255, 255, 255, 0.1) 100%);
+  clip-path: polygon(0 0, 1.2% 100%, 3.5% 28%, 8% 90%, 14% 22%, 21% 88%, 29% 16%, 38% 85%, 48% 18%, 58% 90%, 68% 14%, 78% 82%, 88% 20%, 98% 75%, 100% 0);
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.04));
+}
+
+.p22-shell::after {
+  bottom: 0;
+  top: auto;
+  height: 12px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.05) 100%);
+  clip-path: polygon(0 100%, 0 0, 2% 70%, 8% 32%, 16% 78%, 25% 24%, 35% 82%, 46% 18%, 57% 78%, 68% 22%, 79% 80%, 90% 15%, 100% 0, 100% 100%);
+  filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.04));
+}
+
+.p22-burst {
+  position: absolute;
+  z-index: 0;
+  width: clamp(1.3rem, 4.2vw, 1.95rem);
+  height: clamp(1.3rem, 4.2vw, 1.95rem);
+  background: radial-gradient(ellipse 55% 50% at 45% 40%, #d86880 0%, #8c2840 100%);
+  border-radius: 50% 45% 55% 48%;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.p22-burst--tr {
+  top: 0.1rem;
+  right: 0.05rem;
+  transform: rotate(12deg);
+}
+
+.p22-burst--bl {
+  bottom: 0.3rem;
+  left: 0.1rem;
+  top: auto;
+  transform: rotate(-7deg) scale(0.92);
+}
+
+.p22-star {
+  position: absolute;
+  z-index: 0;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  clip-path: polygon(50% 0%, 60% 35%, 100% 38%, 70% 62%, 78% 100%, 50% 78%, 22% 100%, 28% 62%, 0% 38%, 40% 35%);
+  top: 32%;
+  left: 0.1rem;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.p22-star--2 {
+  top: 48%;
+  left: 0.12rem;
+  transform: rotate(8deg) scale(0.9);
+  opacity: 0.5;
+}
+
+.p22-star--3 {
+  top: 40%;
+  right: 0.1rem;
+  left: auto;
+  transform: rotate(-6deg);
+  opacity: 0.5;
+}
+
+.p22-arrow {
+  position: absolute;
+  z-index: 0;
+  right: 0.12rem;
+  top: 45%;
+  width: 0.5rem;
+  height: 0.4rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-left: 0;
+  border-radius: 0 3px 3px 0;
+  transform: rotate(-5deg);
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.p22-sprig {
+  position: absolute;
+  z-index: 0;
+  right: 0.15rem;
+  bottom: 0.5rem;
+  top: auto;
+  width: 0.1rem;
+  height: 1.05rem;
+  background: linear-gradient(180deg, rgba(255, 215, 100, 0.45) 0%, rgba(180, 150, 80, 0.3) 100%);
+  border-radius: 2px;
+  transform: rotate(4deg);
+  pointer-events: none;
+  opacity: 0.45;
+  box-shadow: 2px 0 0 -1px rgba(200, 160, 80, 0.25);
+}
+
+.p22-tape {
+  position: absolute;
+  z-index: 0;
+  top: 0.08rem;
+  right: 0.1rem;
+  width: 1.2rem;
+  height: 0.34rem;
+  background: linear-gradient(90deg, #4a3e38, #5c5048, #3a322c);
+  border-radius: 1px;
+  transform: rotate(5deg);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.p22-tape--2 {
+  top: 0.15rem;
+  right: 0.5rem;
+  width: 1.05rem;
+  transform: rotate(-6deg);
+  opacity: 0.28;
+}
+
+.p22-dot {
+  position: absolute;
+  z-index: 0;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 150, 90, 0.55);
+  border-radius: 50%;
+  top: 20%;
+  left: 0.2rem;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.p22-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 30em;
+  margin: 0 auto;
+  padding: 0.2rem 0.35rem;
+  box-sizing: border-box;
+}
+
+.p22-body {
+  margin: 0 0 0.15rem;
+  text-align: center;
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  color: #fff8f0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+  white-space: pre-line;
+}
+
+.book-page-face--front .book-page-inner--p22-ish p,
+.book-page-face--front .book-page-inner--p20-triple p {
+  color: #fff8f0;
+}
+
 @media (max-width: 400px) {
   .p20-shell,
   .p19-shell {
+    min-height: 0;
+  }
+
+  .p20t-shell,
+  .p22-shell {
     min-height: 0;
   }
 
