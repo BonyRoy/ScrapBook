@@ -13,7 +13,7 @@ const Page03 = () => (
     >
       <img
         src={image}
-        alt="My Peps"
+        alt="My Peeps"
         style={{
           height: "auto",
           width: "150px",
