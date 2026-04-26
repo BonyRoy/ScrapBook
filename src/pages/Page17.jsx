@@ -15,7 +15,7 @@ export default function Page17() {
         <span className="page17-star" aria-hidden="true" />
         <span className="page17-leaf" aria-hidden="true" />
 
-        <h2 className="page17-title">LOVE IS IN THE AIR</h2>
+        <h2 className="page17-title">Baby P</h2>
 
         <div className="page17-trio">
           <figure className="page17-frame page17-frame--L">

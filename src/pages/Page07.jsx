@@ -20,10 +20,20 @@ const FRAMES = [
 export default function Page07() {
   return (
     <div className="book-page-inner book-page-inner--page7-collage">
+      <h2 className="page7-title">us&gt;&gt;</h2>
       <div className="page7-collage" aria-label="Five polaroid photos">
-        <span className="page7-deco page7-deco--star page7-deco--s1" aria-hidden="true" />
-        <span className="page7-deco page7-deco--star page7-deco--s2" aria-hidden="true" />
-        <span className="page7-deco page7-deco--star page7-deco--s3" aria-hidden="true" />
+        <span
+          className="page7-deco page7-deco--star page7-deco--s1"
+          aria-hidden="true"
+        />
+        <span
+          className="page7-deco page7-deco--star page7-deco--s2"
+          aria-hidden="true"
+        />
+        <span
+          className="page7-deco page7-deco--star page7-deco--s3"
+          aria-hidden="true"
+        />
         <span className="page7-deco page7-deco--leaf" aria-hidden="true" />
         <span className="page7-deco page7-deco--clover" aria-hidden="true" />
         {FRAMES.map((f) => (

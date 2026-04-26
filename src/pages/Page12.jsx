@@ -8,6 +8,7 @@ import img52 from "../images/52.png";
 export default function Page12() {
   return (
     <div className="book-page-inner book-page-inner--page12-gang">
+      <h2 className="page12-title">School Times</h2>
       <div className="page12-collage" aria-label="Group photos">
         <span className="page12-deco page12-deco--star" aria-hidden="true" />
         <span className="page12-deco page12-deco--star page12-deco--s2" aria-hidden="true" />

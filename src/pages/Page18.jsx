@@ -1,8 +1,8 @@
-import img80 from "../images/80.png";
-import img81 from "../images/81.png";
+import img80 from "../images/84.png";
+import img81 from "../images/83.png";
 import img82 from "../images/82.png";
-import img83 from "../images/83.png";
-import img84 from "../images/84.png";
+import img83 from "../images/80.png";
+import img84 from "../images/81.png";
 
 /** Page 18 — 80–84, “FAM JAM” (portrait + wide + portrait, then 83 & 84) */
 export default function Page18() {
@@ -16,7 +16,9 @@ export default function Page18() {
         <span className="page18-star" aria-hidden="true" />
         <span className="page18-leaf" aria-hidden="true" />
 
-        <h2 className="page18-title" lang="en">FAM JAM</h2>
+        <h2 className="page18-title" lang="en">
+          FAM JAM
+        </h2>
 
         <div className="page18-trio">
           <figure className="page18-frame page18-frame--L">
